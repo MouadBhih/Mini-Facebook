@@ -5,32 +5,83 @@ function formulaire_login($message="") {
 	$action = $_SERVER['REQUEST_URI'];
 ?>
 <html>
-	<head><title>Saisie des identifiants</title></head>
+	<head>
+    <link rel="stylesheet" href="css/form.css">
+		<title>Saisie des identifiants</title></head>
     <body>
-   		<?php 
+  
+
+
+   		
+      
+
+
+
+   	 <div class="container">
+        <div class="header">
+            <h2>Connexion au site:</h2>
+        </div>
+        
+        <?php 
    		if ($message) {
      		print $message;
 	    }
-		print "<form action='$action' method='POST'>\n";
+		print "<form action='$action' method='POST' class='form' >\n";
 		?> 
-      <p>Connexion au site:</p>
-      <table>
-	      <tr>
-	        <td>Identifiant:</td>
-	        <td><input type="text" name="login" size="32" maxlength="128"></td>
-	      </tr>
-	      <tr>
-	        <td>Mot de passe:</td>
-	        <td><input type="password" name="password" size="32" maxlength="32"></td>
-	      </tr>
-	      <tr><td colspan="2" align="center">
-	        <input type="submit" value="Se connecter">
-	        <input type="reset" value="Effacer">
-	      </td></tr>
-      </table>
-    </form>
-    <hr>
-    <p><a href="inscription.php">S'inscrire</a></p>
+            <div class="form-control">
+                <label for="username">Identifiant:</label>
+                <input type="text" placeholder="enter your name" id="username"  name="login"  size="32" maxlength="128"/>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label for="username">Mot de passe:</label>
+                <input type="password" placeholder="password" id="password" name="password" size="32" maxlength="32"/>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+           
+            <button type="submit">Se connecter</button>
+            <button type="reset" >Effacer</button>
+
+            <a href="inscription.php">S'inscrire</a>
+        </form>
+    </div>
+    <script src="js/form.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </body>
 </html>
     <?php
