@@ -1,21 +1,5 @@
-// Boite à outils Javascript
-// Vous n'avez pas besoin de comprendre ce fichier pour faire le projet
-// ( mais regardez/modifiez le si vous en avez envie :) )
-
-// Petite fenetre pour choisir une date
-
-// Title: Tigra Calendar
-// URL: http://www.softcomplex.com/products/tigra_calendar/
-// Version: 3.3 (European date format)
-// Date: 09/01/2005 (mm/dd/yyyy)
-// Note: Permission given to use this script in ANY kind of applications if
-//    header lines are left unchanged.
-
-// if two digit year input dates after this year considered 20 century.
 var NUM_CENTYEAR = 30;
-// is time input control required by default
 var BUL_TIMECOMPONENT = false;
-// are year scrolling buttons required by default
 var BUL_YEARSCROLL = true;
 
 var calendars = [];
@@ -23,7 +7,6 @@ var RE_NUM = /^\-?\d+$/;
 
 function calendar1(obj_target) {
 
-	// assigning methods
 	this.gen_date = cal_gen_date1;
 	this.gen_time = cal_gen_time1;
 	this.gen_tsmp = cal_gen_tsmp1;
@@ -32,7 +15,6 @@ function calendar1(obj_target) {
 	this.prs_tsmp = cal_prs_tsmp1;
 	this.popup    = cal_popup1;
 
-	// validate input parameters
 	if (!obj_target)
 		return cal_error("Error calling the calendar: no target control specified");
 	if (obj_target.value == null)
@@ -41,7 +23,6 @@ function calendar1(obj_target) {
 	this.time_comp = BUL_TIMECOMPONENT;
 	this.year_scroll = BUL_YEARSCROLL;
 	
-	// register in global collections
 	this.id = calendars.length;
 	calendars[this.id] = this;
 }
@@ -65,20 +46,13 @@ function cal_popup1 (str_datetime) {
 	obj_calwindow.focus();
 }
 
-// timestamp generating function
 function cal_gen_tsmp1 (dt_datetime) {
 	return(this.gen_date(dt_datetime) + ' ' + this.gen_time(dt_datetime));
 }
 
-// date generating function
 function cal_gen_date1 (dt_datetime) {
 
-// Change from dd-mm-yyyy to yyyy-mm-dd
-// 	return (
-// 		(dt_datetime.getDate() < 10 ? '0' : '') + dt_datetime.getDate() + "-"
-// 		+ (dt_datetime.getMonth() < 9 ? '0' : '') + (dt_datetime.getMonth() + 1) + "-"
-// 		+ dt_datetime.getFullYear()
-// 	);
+
 	return (
 		dt_datetime.getFullYear() + "-"
 		+ (dt_datetime.getMonth() < 9 ? '0' : '') + (dt_datetime.getMonth() + 1) + "-"
@@ -86,7 +60,6 @@ function cal_gen_date1 (dt_datetime) {
 	);
 
 }
-// time generating function
 function cal_gen_time1 (dt_datetime) {
 	return (
 		(dt_datetime.getHours() < 10 ? '0' : '') + dt_datetime.getHours() + ":"
@@ -95,22 +68,17 @@ function cal_gen_time1 (dt_datetime) {
 	);
 }
 
-// timestamp parsing function
 function cal_prs_tsmp1 (str_datetime) {
-	// if no parameter specified return current timestamp
 	if (!str_datetime)
 		return (new Date());
 
-	// if positive integer treat as milliseconds from epoch
 	if (RE_NUM.exec(str_datetime))
 		return new Date(str_datetime);
 		
-	// else treat as date in string format
 	var arr_datetime = str_datetime.split(' ');
 	return this.prs_time(arr_datetime[1], this.prs_date(arr_datetime[0]));
 }
 
-// date parsing function
 function cal_prs_date1 (str_date) {
 
 	var arr_date = str_date.split('-');
@@ -139,7 +107,6 @@ function cal_prs_date1 (str_date) {
 	return (dt_date)
 }
 
-// Date parsing for yyyy-mm-dd
 function cal_prs_date2 (str_date) {
 
 	var arr_date = str_date.split('-');
@@ -168,7 +135,6 @@ function cal_prs_date2 (str_date) {
 	return (dt_date)
 }
 
-// time parsing function
 function cal_prs_time1 (str_time, dt_date) {
 
 	if (!dt_date) return null;

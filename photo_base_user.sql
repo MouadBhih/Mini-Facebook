@@ -1,1 +1,0 @@
--- -- Base de données: `photos`-- GRANT ALL PRIVILEGES ON * . * TO 'l2if6'@'%' IDENTIFIED BY 'l2if6mdp' WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 ;flush privileges;CREATE DATABASE `photos` DEFAULT CHARACTER SET latin1 COLLATE latin1_general_cs;USE photos;
