@@ -6,7 +6,7 @@ $connect = connexion();
 <html>
 <head>
   <title>Accueil</title>
-  <script  type="text/javascript" language="JavaScript" src="fonctions.js"> </script>
+  <script src="fonctions.js"> </script>
 </head>
 <body>
 <?php
@@ -24,6 +24,8 @@ print "<h2>Bienvenue $login !</h2>";
 		$personne_param = rawurlencode($personne);
 		print '<li><a href="photos_personne.php?personne='
 			.$personne_param.'">'.$personne.'</a></li>'."\n";
+
+			
 	}
 ?>
 </ul>

@@ -13,11 +13,14 @@ $connect = connexion();
 <?php
 if (isset($_GET['id'])) {
 	$id_photo = $_GET['id'];
-	$requete = "SELECT fichier,date_photo,description,proprietaire FROM photo WHERE id = $id_photo";
+	$requete = "SELECT id,fichier,date_photo,description,proprietaire FROM photo WHERE id = $id_photo";
 	$resultat = $connect->prepare($requete);
     $resultat->execute();
 	if ($nuplet = $resultat->fetch(PDO::FETCH_ASSOC)) {
 	 	if ($nuplet['proprietaire'] == $login) {
+			$personne = $nuplet['proprietaire'];
+			$id = $nuplet['id'];
+			$personne_param = rawurlencode($personne);
 	 		$fichier = $nuplet['fichier'];
 	 		$date = $nuplet['date_photo'];
 	 		$description = stripslashes($nuplet['description']);
@@ -27,10 +30,14 @@ if (isset($_GET['id'])) {
 	 		print "<p>Date de la photo: ";
 	 		input_date('date_photo','maj',$date);
 	 		print "</p>\n";
+			
 	 		print "<input type='hidden' name='id' value='$id_photo'>";
 	 		print "<input type='hidden' name='but' value='maj'>";
-	 		print "<p><input type='submit' value='Envoyer'> <input type='reset' value='Annuler les changements'></p>\n";
+	 		print "<p><input type='submit' value='Envoyer'></p>\n";
+
+			 print "<button><a href='photo.php?id=$id_photo'>Annuler les modifications</a></button>";
 	 		print "</form>\n";
+			 print "<a href=\"deletephoto.php?deleteid=$id\">Supprimer la photo</a>";
 	 		print "<p><img src='$fichier'></p>";
 	 	} else {
 	 		print "<p><b>Vous ne pouvez pas modifier les informations de cette photo !</b></p>";
